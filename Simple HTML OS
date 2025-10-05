@@ -1,0 +1,408 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My OS - Step 1</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background: transparent;
+        }
+        #bg-nature {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -2;
+            filter: blur(10px) brightness(0.7);
+            pointer-events: none;
+        }
+        #bg-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <img id="bg-nature" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80" alt="Nature Background">
+    <div id="youtube-popup" style="display:none; position:fixed; left:50%; top:50%; transform:translate(-50%,-50%); width:900px; height:540px; background:#181818; border-radius:18px; box-shadow:0 8px 32px #000a; z-index:100; color:#fff; overflow:hidden; transition:transform 0.9s cubic-bezier(.4,2,.3,1), opacity 0.7s;">
+            <div id="popup-header" style="width:100%; height:56px; display:flex; align-items:flex-start; justify-content:flex-end; cursor:move; background:transparent; position:absolute; top:0; left:0; z-index:101;">
+                <button id="popup-close" style="margin:16px 18px 0 0; width:32px; height:32px; background:transparent; border:none; color:#fff; font-size:2rem; cursor:pointer;">&times;</button>
+            </div>
+            <div style="width:100%; height:100%; overflow-y:auto; background:#181818; padding:64px 32px 32px 32px; box-sizing:border-box;">
+                <div style="display:flex; align-items:center; margin-bottom:32px;">
+                    <svg width="48" height="48" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right:18px;">
+                        <rect width="56" height="56" rx="14" fill="#FF0000"/>
+                        <polygon points="22,16 42,28 22,40" fill="#fff"/>
+                    </svg>
+                    <input type="text" placeholder="Search" style="flex:1; padding:10px 16px; border-radius:8px; border:none; font-size:1.1rem; background:#222; color:#fff; margin-right:16px;">
+                    <button style="padding:10px 22px; border-radius:8px; border:none; background:#ff0000; color:#fff; font-size:1.1rem; cursor:pointer;">Search</button>
+                </div>
+                <div style="font-size:1.4rem; font-weight:bold; margin-bottom:18px;">Trending</div>
+                <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:24px;">
+                    <div style="background:#222; border-radius:12px; overflow:hidden; min-height:220px; display:flex; flex-direction:column;">
+                        <img src="https://i.ytimg.com/vi/S6aT56O-40c/hqdefault.jpg" style="width:100%; height:140px; object-fit:cover; display:block;">
+                        <div style="padding:12px; flex:1;">
+                            <div style="font-size:1.1rem; font-weight:bold; margin-bottom:6px;">RIP LEGENDS (Playlist)</div>
+                            <div style="font-size:0.95rem; color:#ccc;">XXXTENTACION, JUICE WRLD</div>
+                        </div>
+                    </div>
+                    <div style="background:#222; border-radius:12px; overflow:hidden; min-height:220px; display:flex; flex-direction:column;">
+                        <img src="https://i.ytimg.com/vi/wxXE8Q_hvOA/hqdefault.jpg" style="width:100%; height:140px; object-fit:cover; display:block;">
+                        <div style="padding:12px; flex:1;">
+                            <div style="font-size:1.1rem; font-weight:bold; margin-bottom:6px;">Until I Found You (Playlist)</div>
+                            <div style="font-size:0.95rem; color:#ccc;">Stephen Sanchez</div>
+                        </div>
+                    </div>
+                    <div style="background:#222; border-radius:12px; overflow:hidden; min-height:220px; display:flex; flex-direction:column;">
+                        <img src="https://i.ytimg.com/vi/3JZ_D3ELwOQ/hqdefault.jpg" style="width:100%; height:140px; object-fit:cover; display:block;">
+                        <div style="padding:12px; flex:1;">
+                            <div style="font-size:1.1rem; font-weight:bold; margin-bottom:6px;">See You Again</div>
+                            <div style="font-size:0.95rem; color:#ccc;">Wiz Khalifa ft. Charlie Puth</div>
+                        </div>
+                    </div>
+                    <div style="background:#222; border-radius:12px; overflow:hidden; min-height:220px; display:flex; flex-direction:column;">
+                        <img src="https://i.ytimg.com/vi/ktvTqknDobU/hqdefault.jpg" style="width:100%; height:140px; object-fit:cover; display:block;">
+                        <div style="padding:12px; flex:1;">
+                            <div style="font-size:1.1rem; font-weight:bold; margin-bottom:6px;">Radioactive</div>
+                            <div style="font-size:0.95rem; color:#ccc;">Imagine Dragons</div>
+                        </div>
+                    </div>
+                    <div style="background:#222; border-radius:12px; overflow:hidden; min-height:220px; display:flex; flex-direction:column;">
+                        <img src="https://i.ytimg.com/vi/LsoLEjrDogU/hqdefault.jpg" style="width:100%; height:140px; object-fit:cover; display:block;">
+                        <div style="padding:12px; flex:1;">
+                            <div style="font-size:1.1rem; font-weight:bold; margin-bottom:6px;">Lean On</div>
+                            <div style="font-size:0.95rem; color:#ccc;">Major Lazer & DJ Snake</div>
+                        </div>
+                    </div>
+                    <div style="background:#222; border-radius:12px; overflow:hidden; min-height:220px; display:flex; flex-direction:column;">
+                        <img src="https://i.ytimg.com/vi/OPf0YbXqDm0/hqdefault.jpg" style="width:100%; height:140px; object-fit:cover; display:block;">
+                        <div style="padding:12px; flex:1;">
+                            <div style="font-size:1.1rem; font-weight:bold; margin-bottom:6px;">Uptown Funk</div>
+                            <div style="font-size:0.95rem; color:#ccc;">Mark Ronson ft. Bruno Mars</div>
+                        </div>
+                    </div>
+                    <div style="background:#222; border-radius:12px; overflow:hidden; min-height:220px; display:flex; flex-direction:column;">
+                        <img src="https://i.ytimg.com/vi/2Vv-BfVoq4g/hqdefault.jpg" style="width:100%; height:140px; object-fit:cover; display:block;">
+                        <div style="padding:12px; flex:1;">
+                            <div style="font-size:1.1rem; font-weight:bold; margin-bottom:6px;">Perfect</div>
+                            <div style="font-size:0.95rem; color:#ccc;">Ed Sheeran</div>
+                        </div>
+                    </div>
+                    <div style="background:#222; border-radius:12px; overflow:hidden; min-height:220px; display:flex; flex-direction:column;">
+                        <img src="https://i.ytimg.com/vi/09R8_2nJtjg/hqdefault.jpg" style="width:100%; height:140px; object-fit:cover; display:block;">
+                        <div style="padding:12px; flex:1;">
+                            <div style="font-size:1.1rem; font-weight:bold; margin-bottom:6px;">Sugar</div>
+                            <div style="font-size:0.95rem; color:#ccc;">Maroon 5</div>
+                        </div>
+                    </div>
+                    <div style="background:#222; border-radius:12px; overflow:hidden; min-height:220px; display:flex; flex-direction:column;">
+                        <img src="https://i.ytimg.com/vi/pRpeEdMmmQ0/hqdefault.jpg" style="width:100%; height:140px; object-fit:cover; display:block;">
+                        <div style="padding:12px; flex:1;">
+                            <div style="font-size:1.1rem; font-weight:bold; margin-bottom:6px;">Waka Waka (This Time for Africa)</div>
+                            <div style="font-size:0.95rem; color:#ccc;">Shakira</div>
+                        </div>
+                    </div>
+                </div>
+                <div style="font-size:1.4rem; font-weight:bold; margin:32px 0 18px;">Search Results</div>
+                <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:24px;">
+                    <div style="background:#222; border-radius:12px; overflow:hidden; min-height:220px; display:flex; flex-direction:column;">
+                        <img src="https://i.ytimg.com/vi/ktvTqknDobU/hqdefault.jpg" style="width:100%; height:140px; object-fit:cover; display:block;">
+                        <div style="padding:12px; flex:1;">
+                            <div style="font-size:1.1rem; font-weight:bold; margin-bottom:6px;">Radioactive</div>
+                            <div style="font-size:0.95rem; color:#ccc;">Imagine Dragons</div>
+                        </div>
+                    </div>
+                    <div style="background:#222; border-radius:12px; overflow:hidden; min-height:220px; display:flex; flex-direction:column;">
+                        <img src="https://i.ytimg.com/vi/LsoLEjrDogU/hqdefault.jpg" style="width:100%; height:140px; object-fit:cover; display:block;">
+                        <div style="padding:12px; flex:1;">
+                            <div style="font-size:1.1rem; font-weight:bold; margin-bottom:6px;">Lean On</div>
+                            <div style="font-size:0.95rem; color:#ccc;">Major Lazer & DJ Snake</div>
+                        </div>
+                    </div>
+                    <div style="background:#222; border-radius:12px; overflow:hidden; min-height:220px; display:flex; flex-direction:column;">
+                        <img src="https://i.ytimg.com/vi/OPf0YbXqDm0/hqdefault.jpg" style="width:100%; height:140px; object-fit:cover; display:block;">
+                        <div style="padding:12px; flex:1;">
+                            <div style="font-size:1.1rem; font-weight:bold; margin-bottom:6px;">Uptown Funk</div>
+                            <div style="font-size:0.95rem; color:#ccc;">Mark Ronson ft. Bruno Mars</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <canvas id="bg-particles"></canvas>
+        <!-- Theme App Popup -->
+        <div id="theme-popup" style="display:none; position:fixed; left:50%; top:50%; transform:translate(-50%,-50%); width:420px; height:260px; background:rgba(20,30,40,0.92); border-radius:18px; box-shadow:0 8px 32px #00fff7a0; z-index:101; color:#0ff; overflow:hidden; transition:transform 0.7s cubic-bezier(.4,2,.3,1), opacity 0.5s; backdrop-filter: blur(12px);">
+            <div style="width:100%; height:56px; display:flex; align-items:center; justify-content:space-between; cursor:move; background:transparent; position:absolute; top:0; left:0; z-index:102;">
+                <span style="margin-left:22px; font-size:1.6rem; font-weight:bold; color:#0ff; letter-spacing:2px;">Theme App</span>
+                <button id="theme-popup-close" style="margin:16px 18px 0 0; width:32px; height:32px; background:transparent; border:none; color:#0ff; font-size:2rem; cursor:pointer;">&times;</button>
+            </div>
+            <div style="width:100%; height:100%; overflow-y:auto; background:transparent; padding:64px 32px 32px 32px; box-sizing:border-box; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                <div style="font-size:1.3rem; font-weight:bold; margin-bottom:18px; color:#0ff;">Futuristic Theme App</div>
+                <div style="font-size:1.1rem; color:#fff; opacity:0.7;">Theme options will appear here soon.</div>
+            </div>
+        </div>
+    <div id="app-dock" style="position:fixed; left:50%; bottom:96px; transform:translateX(-50%); display:flex; gap:32px; z-index:12;">
+            <a href="#" id="youtube-app-icon" style="width:88px; height:88px; display:flex; align-items:center; justify-content:center; background:transparent; border-radius:22px; box-shadow:0 4px 16px #0004; cursor:pointer; transition:box-shadow 0.2s;">
+                <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="56" height="56" rx="14" fill="#FF0000"/>
+                    <polygon points="22,16 42,28 22,40" fill="#fff"/>
+                </svg>
+            </a>
+            <a href="#" id="theme-app-icon" style="width:88px; height:88px; display:flex; align-items:center; justify-content:center; background:transparent; border-radius:22px; box-shadow:0 4px 16px #00fff7a0; cursor:pointer; transition:box-shadow 0.2s;">
+                <!-- Futuristic SVG logo -->
+                <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="56" height="56" rx="16" fill="#0ff"/>
+                  <circle cx="28" cy="28" r="16" fill="#222" stroke="#0ff" stroke-width="2"/>
+                  <path d="M16 28 Q28 8 40 28 Q28 48 16 28 Z" fill="#0ff" opacity="0.7"/>
+                  <circle cx="28" cy="28" r="6" fill="#fff" opacity="0.8"/>
+                  <text x="28" y="34" text-anchor="middle" font-size="10" fill="#0ff" font-family="monospace">T</text>
+                </svg>
+            </a>
+        </div>
+                <div id="time-widget" style="position:fixed; left:56px; top:64px; background:rgba(35,35,58,0.32); color:#b48cff; font-family:'Times New Roman', Times, serif; font-size:2.2rem; padding:32px 56px; border-radius:22px; box-shadow:0 4px 24px #0006; opacity:0.96; z-index:10; text-align:center; cursor:move; resize:both; overflow:auto; min-width:320px; min-height:140px; backdrop-filter: blur(14px) saturate(1.2); -webkit-backdrop-filter: blur(14px) saturate(1.2);">
+                    <div id="clock" style="font-weight:bold;"></div>
+                    <div id="date" style="margin-top:6px;"></div>
+                    <div id="resize-handle" style="position:absolute; right:6px; bottom:6px; width:18px; height:18px; cursor:se-resize; z-index:11;"></div>
+                </div>
+            <div id="temperature-widget" style="position:fixed; right:56px; top:64px; width:140px; height:140px; background:rgba(35,35,58,0.32); color:#b48cff; font-family:'Times New Roman', Times, serif; font-size:2.2rem; border-radius:22px; box-shadow:0 4px 24px #0006; opacity:0.96; z-index:10; text-align:center; display:flex; align-items:center; justify-content:center; backdrop-filter: blur(14px) saturate(1.2); -webkit-backdrop-filter: blur(14px) saturate(1.2); position:fixed; overflow:hidden;">
+                <div style="position:absolute; left:0px; top:12px; width:90px; height:40px; z-index:0; pointer-events:none;">
+                    <span style="position:absolute; left:12px; top:0; font-size:2.6rem; opacity:0.32;">☀️</span>
+                    <span style="position:absolute; left:30px; top:0; font-size:2.6rem; opacity:0.45;">☁️</span>
+                    <span style="position:absolute; left:66px; top:10px; font-size:1.18rem; color:#fff; opacity:0.7; font-weight:500;">Mostly Cloudy</span>
+                </div>
+                <div id="temperature" style="font-size:4.4rem; font-weight:bold; position:relative; z-index:1; width:100%; margin-top:32px;"></div>
+            </div>
+            <script>
+        // Make temperature widget draggable
+        const tempWidget = document.getElementById('temperature-widget');
+        let tempDragging = false, tempOffsetX = 0, tempOffsetY = 0;
+        tempWidget.addEventListener('mousedown', function(e) {
+            tempDragging = true;
+            tempOffsetX = e.clientX - tempWidget.getBoundingClientRect().left;
+            tempOffsetY = e.clientY - tempWidget.getBoundingClientRect().top;
+            tempWidget.style.transition = 'none';
+        });
+        document.addEventListener('mousemove', function(e) {
+            if (tempDragging) {
+                tempWidget.style.left = e.clientX - tempOffsetX + 'px';
+                tempWidget.style.top = e.clientY - tempOffsetY + 'px';
+                tempWidget.style.transform = '';
+            }
+        });
+        document.addEventListener('mouseup', function() {
+            tempDragging = false;
+            tempWidget.style.transition = '';
+        });
+        // Make popup draggable
+        const popup = document.getElementById('youtube-popup');
+        const header = document.getElementById('popup-header');
+        let dragging = false, dragOffsetX = 0, dragOffsetY = 0;
+        header.addEventListener('mousedown', function(e) {
+            dragging = true;
+            const rect = popup.getBoundingClientRect();
+            dragOffsetX = e.clientX - rect.left;
+            dragOffsetY = e.clientY - rect.top;
+            popup.style.transition = 'none';
+        });
+        document.addEventListener('mousemove', function(e) {
+            if (dragging) {
+                popup.style.left = e.clientX - dragOffsetX + 'px';
+                popup.style.top = e.clientY - dragOffsetY + 'px';
+                popup.style.transform = '';
+            }
+        });
+        document.addEventListener('mouseup', function() {
+            dragging = false;
+            popup.style.transition = '';
+        });
+
+        // Close popup with cross button
+        document.getElementById('popup-close').addEventListener('click', function() {
+            hideYoutubePopup();
+        });
+        // Show popup with reset animation
+        function showYoutubePopup() {
+            const popup = document.getElementById('youtube-popup');
+            popup.style.left = '50%';
+            popup.style.top = '50%';
+            popup.style.transform = 'translate(-50%,-50%)';
+            popup.style.display = 'block';
+            popup.style.opacity = '1';
+        }
+
+        // Hide popup with swipe-down effect
+        function hideYoutubePopup() {
+            const popup = document.getElementById('youtube-popup');
+            popup.style.transform = 'translate(-50%,100vh)';
+            popup.style.opacity = '0';
+            setTimeout(() => { popup.style.display = 'none'; }, 900);
+        }
+
+        // Show popup on YouTube app icon click
+        document.getElementById('youtube-app-icon').addEventListener('click', function(e) {
+            e.preventDefault();
+            showYoutubePopup();
+        });
+        // Show Theme app popup
+        document.getElementById('theme-app-icon').addEventListener('click', function(e) {
+            e.preventDefault();
+            showThemePopup();
+        });
+        // Close Theme popup
+        document.getElementById('theme-popup-close').addEventListener('click', function() {
+            hideThemePopup();
+        });
+        function showThemePopup() {
+            const popup = document.getElementById('theme-popup');
+            popup.style.left = '50%';
+            popup.style.top = '50%';
+            popup.style.transform = 'translate(-50%,-50%)';
+            popup.style.display = 'block';
+            popup.style.opacity = '1';
+        }
+        function hideThemePopup() {
+            const popup = document.getElementById('theme-popup');
+            popup.style.transform = 'translate(-50%,100vh)';
+            popup.style.opacity = '0';
+            setTimeout(() => { popup.style.display = 'none'; }, 700);
+        }
+
+        // Make Theme popup draggable
+        const themePopup = document.getElementById('theme-popup');
+        const themeHeader = themePopup.querySelector('div[style*="cursor:move"]');
+        let themeDragging = false, themeOffsetX = 0, themeOffsetY = 0;
+        themeHeader.addEventListener('mousedown', function(e) {
+            themeDragging = true;
+            const rect = themePopup.getBoundingClientRect();
+            themeOffsetX = e.clientX - rect.left;
+            themeOffsetY = e.clientY - rect.top;
+            themePopup.style.transition = 'none';
+        });
+        document.addEventListener('mousemove', function(e) {
+            if (themeDragging) {
+                themePopup.style.left = e.clientX - themeOffsetX + 'px';
+                themePopup.style.top = e.clientY - themeOffsetY + 'px';
+                themePopup.style.transform = '';
+            }
+        });
+        document.addEventListener('mouseup', function() {
+            themeDragging = false;
+            themePopup.style.transition = '';
+        });
+
+        // Close popup when clicking outside
+        document.addEventListener('mousedown', function(e) {
+            const popup = document.getElementById('youtube-popup');
+            if (popup.style.display === 'block' && !popup.contains(e.target) && e.target.id !== 'youtube-app-icon') {
+                hideYoutubePopup();
+            }
+        });
+                                                        function getTemperatureColor(temp) {
+                                                            // Normal temp is 25°C (white)
+                                                            // Lowest: 2°C (blue), Highest: 40°C (yellow)
+                                                            if (temp >= 24.5 && temp <= 25.5) return '#fff';
+                                                            if (temp < 25) {
+                                                                // 2°C = deep blue, 25°C = white
+                                                                // Make transition less aggressive near 25°C
+                                                                let ratio = Math.max(0, Math.min(1, (25-temp)/23));
+                                                                // Use a non-linear curve for smoother transition near white
+                                                                ratio = Math.pow(ratio, 1.7);
+                                                                let r = Math.round(255 - (222 * ratio));
+                                                                let g = Math.round(255 - (105 * ratio));
+                                                                let b = Math.round(255 - (12 * ratio));
+                                                                return `rgb(${r},${g},${b})`;
+                                                            } else {
+                                                                // 25°C = white, 40°C = yellow (#ffd600)
+                                                                let ratio = Math.max(0, Math.min(1, (temp-25)/15));
+                                                                // Use a non-linear curve for smoother transition near white
+                                                                ratio = Math.pow(ratio, 1.7);
+                                                                let r = 255;
+                                                                let g = Math.round(255 - (41*ratio));
+                                                                let b = Math.round(255 - (255*ratio));
+                                                                return `rgb(${r},${g},${b})`;
+                                                            }
+                                                        }
+
+                                                let currentTemp = 24;
+                                                async function fetchTemperature() {
+                                                    try {
+                                                        // wttr.in returns plain text, but we can get JSON with ?format=j1
+                                                        const res = await fetch('https://wttr.in/Chengdu?format=j1');
+                                                        if (!res.ok) throw new Error('Network error');
+                                                        const data = await res.json();
+                                                        // Get current temperature in Celsius
+                                                        currentTemp = parseFloat(data.current_condition[0].temp_C);
+                                                    } catch (e) {
+                                                        // fallback to 24 if error
+                                                        currentTemp = 24;
+                                                    }
+                                                }
+
+                                                function updateTimeWidget() {
+                                                    const now = new Date();
+                                                    let hours = now.getHours();
+                                                    const minutes = String(now.getMinutes()).padStart(2, '0');
+                                                    const seconds = String(now.getSeconds()).padStart(2, '0');
+                                                    const ampm = hours >= 12 ? 'PM' : 'AM';
+                                                    hours = hours % 12;
+                                                    hours = hours ? hours : 12; // 0 should be 12
+                                                    document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds} ${ampm}`;
+                                                    const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
+                                                    document.getElementById('date').textContent = now.toLocaleDateString(undefined, options);
+
+                                                    // Fixed font sizes
+                                                    document.getElementById('clock').style.fontSize = '3.6rem';
+                                                    document.getElementById('date').style.fontSize = '2.2rem';
+                                                    document.getElementById('temperature').textContent = `${currentTemp}°C`;
+                                                    document.getElementById('temperature').style.fontSize = '2.2rem';
+                                                    document.getElementById('temperature').style.color = getTemperatureColor(currentTemp);
+                                                }
+                                                setInterval(updateTimeWidget, 1000);
+                                                updateTimeWidget();
+                                                // Fetch temperature every 10 minutes
+                                                fetchTemperature();
+                                                setInterval(fetchTemperature, 600000);
+
+                        // Make widget draggable
+                        const widget = document.getElementById('time-widget');
+                        let isDragging = false, offsetX = 0, offsetY = 0;
+                        widget.addEventListener('mousedown', function(e) {
+                            // Only drag if not clicking the resize handle
+                            if (e.target.id === 'resize-handle') return;
+                            isDragging = true;
+                            offsetX = e.clientX - widget.getBoundingClientRect().left;
+                            offsetY = e.clientY - widget.getBoundingClientRect().top;
+                            widget.style.transition = 'none';
+                        });
+                        document.addEventListener('mousemove', function(e) {
+                            if (isDragging) {
+                                widget.style.left = e.clientX - offsetX + 'px';
+                                widget.style.top = e.clientY - offsetY + 'px';
+                                widget.style.transform = '';
+                            }
+                        });
+                        document.addEventListener('mouseup', function() {
+                            isDragging = false;
+                            widget.style.transition = '';
+                        });
+
+                        // Optional: visually indicate resize handle (CSS resize is enabled)
+            </script>
+    <script>
+        // Removed moving particles animation
+    </script>
+</body>
+</html>
